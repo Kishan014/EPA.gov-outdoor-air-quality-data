@@ -10,3 +10,28 @@ View historical CO pollutant data by state, county, and local sites
 Analyze pollutant trends across different time periods and areas
 Understand trends of improvment or deteration by filterting for sites with the best and worst pollution
 This project will give researchers a better understanding of CO pollution which will allow better research of State and municipality policy to improve pollution standards.
+
+Tech Stack
+Containerization Platform: Docker
+Docker provides standardized container environments, ensuring consistent project execution across different infrastructure. By encapsulating components (like Kafka, Airflow, etc.) into independent containers, it greatly simplifies deployment and achieves perfect consistency between development and production environments, reducing the complexity of environment configuration.
+
+Cloud Platform: Google Cloud Platform (GCP)
+GCP, as a global leading cloud service provider, offers complete infrastructure and service support. This project leverages GCP's high reliability, globally distributed architecture, and powerful data processing capabilities to build a scalable and cost-effective cloud-native solution, particularly suitable for developing and running data-intensive applications.
+
+Infrastructure as Code: Terraform
+Terraform enables programmatic management of infrastructure through declarative configuration files that automate the creation and management of GCP resources, including storage buckets, BigQuery datasets, and compute instances. This ensures repeatable infrastructure deployment, version control, and consistency, greatly improving development efficiency and system stability.
+
+Workflow Orchestration: Apache Airflow
+Airflow serves as a powerful workflow orchestration tool responsible for scheduling and monitoring the entire data pipeline. Through Python-defined DAGs (Directed Acyclic Graphs), it automates the execution of data extraction, processing, and loading tasks, and provides a rich monitoring interface and failure retry mechanisms, ensuring data processing reliability and visualization.
+
+Data Processing: Apache Kafka (with Dataflow)
+Kafka provides a high-throughput, low-latency distributed messaging queue system, enabling real-time data stream processing. Combined with Google Cloud Dataflow, it builds a powerful stream processing pipeline capable of handling high-frequency data updates from the LTA API, ensuring data timeliness and integrity, providing a reliable data source for subsequent analysis.
+
+Data Transformation: dbt Cloud
+dbt (data build tool) Cloud offers powerful data transformation and modeling capabilities, implementing structured transformations in the data warehouse through SQL and Git version control. dbt's modular design and testing framework ensure data quality and consistency, allowing data analysts to focus on business logic rather than technical implementation.
+
+Storage & Warehousing: Google Cloud Storage (GCS), BigQuery
+GCS serves as a high-performance object storage service, providing data lake functionality for storing raw and processed data. BigQuery, as a serverless data warehouse, offers millisecond-level query performance and PB-level data processing capabilities, achieving cost-effective large-scale data analysis, with its no-provisioning feature allowing systems to scale automatically according to demand.
+
+Visualization: Looker Studio
+Looker Studio (formerly Google Data Studio) provides rich data visualization capabilities, directly connecting to BigQuery data sources to create interactive dashboards. Through a drag-and-drop interface and custom charts, it displays key metrics and trends in parking availability, allowing end users to easily understand and utilize data insights to make informed parking decisions.
