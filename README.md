@@ -32,3 +32,11 @@ The final output of this project is a comprehensive interactive dashboard that e
 
 * **Storage & Warehousing: Google Cloud Storage (GCS), BigQuery**  
   GCS serves as a high-performance object storage service, providing data lake functionality for storing raw and processed data. BigQuery, as a serverless data warehouse, offers millisecond-level query performance and PB-level data processing capabilities, achieving cost-effective large-scale data analysis, with its no-provisioning feature allowing systems to scale automatically according to demand.
+
+## Project Architecture 
+
+![image](https://github.com/user-attachments/assets/42a52d29-8cc2-4285-b94d-ed5105399a79)
+
+![image](https://github.com/user-attachments/assets/404d464f-6919-4365-8f6f-48f828dcee81)
+
+
