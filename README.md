@@ -1,4 +1,4 @@
-#EPA Outdoor Air Quaility Data
+EPA Outdoor Air Quaility Data
 https://www.epa.gov/outdoor-air-quality-data/ 
 
 Overview
@@ -33,5 +33,25 @@ dbt (data build tool) Cloud offers powerful data transformation and modeling cap
 Storage & Warehousing: Google Cloud Storage (GCS), BigQuery
 GCS serves as a high-performance object storage service, providing data lake functionality for storing raw and processed data. BigQuery, as a serverless data warehouse, offers millisecond-level query performance and PB-level data processing capabilities, achieving cost-effective large-scale data analysis, with its no-provisioning feature allowing systems to scale automatically according to demand.
 
+
+
+
+# EPA Outdoor Air Quality Data
+https://www.epa.gov/outdoor-air-quality-data/
+
+## Overview
+This project is a complete end-to-end data engineering pipeline that extracts, processes, and analyzes EPA's historical and real time data for daily air quality summary statistics for the criteria pollutants to monitor.
+
+The final output of this project is a comprehensive interactive dashboard that enables users to:
+
+* View historical CO pollutant data by state, county, and local sites
+* Analyze pollutant trends across different time periods and areas
+* Understand trends of improvement or deterioration by filtering for sites with the best and worst pollution
+
+## Tech Stack
+* **Containerization Platform**: Docker
+* **Cloud Platform**: Google Cloud Platform (GCP)
+* **Infrastructure as Code**: Terraform
+* **Workflow Orchestration**: Apache Airflow
 Visualization: Looker Studio
 Looker Studio (formerly Google Data Studio) provides rich data visualization capabilities, directly connecting to BigQuery data sources to create interactive dashboards. Through a drag-and-drop interface and custom charts, it displays key metrics and trends in parking availability, allowing end users to easily understand and utilize data insights to make informed parking decisions.
