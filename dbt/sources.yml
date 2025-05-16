@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: co_air_quality
+    database: airqualitydata-455321
+    schema: co_air_quality
+    tables:
+      - name: co_2024_raw

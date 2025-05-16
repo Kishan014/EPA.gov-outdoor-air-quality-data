@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: air_quality_table
+    columns:
+      - name: date_cleaned
+        tests:
+          - not_null
+      - name: state
+        tests:
+          - not_null
+      - name: co_level_standardized
+        tests:
+          - not_null
+          - accepted_values:
+              values: [">= 0"]
+      - name: site_id
+        tests:
+          - not_null
