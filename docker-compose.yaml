@@ -1,0 +1,95 @@
+services:
+  airflow-postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+    networks:
+      - airflow-network
+
+  airflow-init:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      airflow-postgres:
+        condition: service_healthy
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres/airflow
+      - AIRFLOW__CORE__FERNET_KEY=HGopzmOl2EZILtQRHKLXgDPLB_w45s5KT37FZzqY2pc=
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/gcp-key.json
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./dbt:/opt/airflow/dbt
+      - ./gcp-key.json:/opt/airflow/gcp-key.json
+    command: bash -c "airflow db migrate && airflow connections create-default-connections"
+    restart: on-failure
+    networks:
+      - airflow-network
+
+  airflow-scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      airflow-postgres:
+        condition: service_healthy
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres/airflow
+      - AIRFLOW__CORE__FERNET_KEY=HGopzmOl2EZILtQRHKLXgDPLB_w45s5KT37FZzqY2pc=
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/gcp-key.json
+      - AIRFLOW__WEBSERVER__SECRET_KEY=X7kPqW9vL2mJ5tR8yN3hD6sG4xB1cE0iA2jF9uK
+      - AIRFLOW__SCHEDULER__SCHEDULER_NAME=airflow-scheduler
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./csv:/opt/airflow/csv
+      - ./dbt:/opt/airflow/dbt
+      - ./gcp-key.json:/opt/airflow/gcp-key.json
+    command: scheduler
+    hostname: airflow-scheduler
+    networks:
+      - airflow-network
+
+  airflow-webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      airflow-postgres:
+        condition: service_healthy
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@airflow-postgres/airflow
+      - AIRFLOW__CORE__FERNET_KEY=HGopzmOl2EZILtQRHKLXgDPLB_w45s5KT37FZzqY2pc=
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/airflow/gcp-key.json
+      - AIRFLOW__WEBSERVER__SECRET_KEY=X7kPqW9vL2mJ5tR8yN3hD6sG4xB1cE0iA2jF9uK
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./csv:/opt/airflow/csv
+      - ./dbt:/opt/airflow/dbt
+      - ./gcp-key.json:/opt/airflow/gcp-key.json
+    ports:
+      - "8080:8080"
+    command: webserver
+    hostname: airflow-webserver
+    networks:
+      - airflow-network
+
+networks:
+  airflow-network:
+    driver: bridge
+
+volumes:
+  postgres-db-volume:

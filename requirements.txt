@@ -1,0 +1,8 @@
+apache-airflow-providers-google==10.22.0
+dbt-bigquery==1.8.2
+google-api-core==2.13.0
+google-cloud-bigquery==3.10.0
+grpcio==1.62.0
+google-auth==2.29.0
+googleapis-common-protos==1.63.0
+google-ads==24.1.0
