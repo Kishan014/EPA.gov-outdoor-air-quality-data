@@ -37,9 +37,12 @@ The final output of this project is a comprehensive interactive dashboard that e
 
 ![image](https://github.com/user-attachments/assets/42a52d29-8cc2-4285-b94d-ed5105399a79)
 
+![image](https://github.com/user-attachments/assets/404d464f-6919-4365-8f6f-48f828dcee81)
 
 ## Project Structure
 
+
+```
 EPAPipeline
 ├─ airflow-docker
 │  ├─ csv
@@ -232,6 +235,5 @@ EPAPipeline
    └─ terraform_1.11.3_windows_amd64
       └─ LICENSE.txt
 
-![image](https://github.com/user-attachments/assets/404d464f-6919-4365-8f6f-48f828dcee81)
-
+```
 
